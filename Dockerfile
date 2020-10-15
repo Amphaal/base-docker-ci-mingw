@@ -43,6 +43,6 @@ USER root
     
     # generate wrapper
     COPY wine-wrappers /wine-wrappers
-    RUN cd wine-wrappers && cmake -GNinja -B_gen -H. && ninja -C_gen install
+    RUN cd wine-wrappers && cmake -GNinja -B_gen -H. && ninja -C_gen install && cd ..
 
     CMD [ "/usr/bin/bash" ]

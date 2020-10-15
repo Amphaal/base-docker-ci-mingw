@@ -40,14 +40,6 @@ USER root
     RUN pacman -S --needed --noconfirm mingw64/mingw-w64-x86_64-binutils
     
     RUN pacman -S --needed --noconfirm mingw64/mingw-w64-x86_64-qt-installer-framework
-
-    #install requirements
-    ADD https://raw.githubusercontent.com/Amphaal/understory/master/deps/msys2/pkglist_build.txt /
-    RUN pacman -S --needed --noconfirm - < ./pkglist_build.txt
-
-    RUN pacman -S --noconfirm --noprogressbar --needed imagemagick
-    # RUN pacman -S --noconfirm --noprogressbar --needed protobuf 
-    RUN pacman -U --noconfirm --noprogressbar --needed https://archive.archlinux.org/packages/p/protobuf/protobuf-3.12.3-1-x86_64.pkg.tar.zst
     
     # generate wrapper
     COPY wine-wrappers /wine-wrappers

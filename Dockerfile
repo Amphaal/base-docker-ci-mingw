@@ -6,18 +6,19 @@ USER root
     RUN echo "[multilib]" >> /etc/pacman.conf \
         && echo "Include = /etc/pacman.d/mirrorlist" >> /etc/pacman.conf \
         && echo "" >> /etc/pacman.conf
+    
+    #add msys and mingw64 mirrorlist
+    RUN echo "[mingw64]" >> /etc/pacman.conf \
+        && echo "Include = /etc/pacman.d/mirrorlist.mingw64" >> /etc/pacman.conf \
+        && echo "" >> /etc/pacman.conf \
+        && echo "[msys]" >> /etc/pacman.conf \
+        && echo "Include = /etc/pacman.d/mirrorlist.msys" >> /etc/pacman.conf \
+        && echo "" >> /etc/pacman.conf
         
-    #add msys2 mirrorlist
-    RUN echo "[mingw64]"  >> /etc/pacman.conf \
-        && echo "SigLevel = Never" >> /etc/pacman.conf \
-        && echo "Server = https://sourceforge.net/projects/msys2/files/REPOS/MINGW/x86_64/" >> /etc/pacman.conf \
-        && echo "Server = https://www2.futureware.at/~nickoe/msys2-mirror/mingw/x86_64/" >> /etc/pacman.conf \
-        && echo "Server = https://mirror.yandex.ru/mirrors/msys2/mingw/x86_64/" >> /etc/pacman.conf \
-        && echo "Server = https://mirrors.tuna.tsinghua.edu.cn/msys2/mingw/x86_64/" >> /etc/pacman.conf \
-        && echo "Server = http://mirrors.ustc.edu.cn/msys2/mingw/x86_64/" >> /etc/pacman.conf \
-        && echo "Server = http://mirror.bit.edu.cn/msys2/mingw/x86_64/" >> /etc/pacman.conf \
-        && echo "Server = https://mirror.selfnet.de/msys2/mingw/x86_64/" >> /etc/pacman.conf \
-        && echo "Server = https://mirrors.sjtug.sjtu.edu.cn/msys2/mingw/x86_64/" >> /etc/pacman.conf
+        
+    #copy mirrorlists
+    ADD https://raw.githubusercontent.com/msys2/MSYS2-packages/master/pacman-mirrors/mirrorlist.mingw64 /etc/pacman.d/
+    ADD https://raw.githubusercontent.com/msys2/MSYS2-packages/master/pacman-mirrors/mirrorlist.msys /etc/pacman.d/
     
     # update mirrorlist
     RUN pacman -Syyu --needed --noconfirm
@@ -39,6 +40,7 @@ USER root
     RUN pacman -S --needed --noconfirm mingw64/mingw-w64-x86_64-gcc
     RUN pacman -S --needed --noconfirm mingw64/mingw-w64-x86_64-binutils
     
+    # for windres
     RUN pacman -S --needed --noconfirm mingw-w64-cross-binutils
     
     RUN pacman -S --needed --noconfirm mingw64/mingw-w64-x86_64-qt-installer-framework

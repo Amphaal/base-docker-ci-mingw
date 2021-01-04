@@ -9,12 +9,13 @@ USER root
     
     #add msys and mingw64 mirrorlist
     RUN echo "[mingw64]" >> /etc/pacman.conf \
+        && echo "SigLevel = Optional TrustAll" >> /etc/pacman.conf \
         && echo "Include = /etc/pacman.d/mirrorlist.mingw64" >> /etc/pacman.conf \
         && echo "" >> /etc/pacman.conf \
         && echo "[msys]" >> /etc/pacman.conf \
+        && echo "SigLevel = Optional TrustAll" >> /etc/pacman.conf \
         && echo "Include = /etc/pacman.d/mirrorlist.msys" >> /etc/pacman.conf \
         && echo "" >> /etc/pacman.conf
-        
         
     #copy mirrorlists
     ADD https://raw.githubusercontent.com/msys2/MSYS2-packages/master/pacman-mirrors/mirrorlist.mingw64 /etc/pacman.d/

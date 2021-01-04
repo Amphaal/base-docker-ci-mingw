@@ -39,6 +39,8 @@ USER root
     RUN pacman -S --needed --noconfirm mingw64/mingw-w64-x86_64-gcc
     RUN pacman -S --needed --noconfirm mingw64/mingw-w64-x86_64-binutils
     
+    RUN pacman -S --needed --noconfirm mingw64/mingw-w64-cross-binutils
+    
     RUN pacman -S --needed --noconfirm mingw64/mingw-w64-x86_64-qt-installer-framework
     
     # generate wrapper

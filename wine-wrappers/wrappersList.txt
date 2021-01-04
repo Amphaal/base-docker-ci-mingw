@@ -3,3 +3,4 @@
 /mingw64/bin/devtool.exe
 /mingw64/bin/installerbase.exe
 /mingw64/bin/repogen.exe
+/opt/bin/x86_64-w64-mingw32-windres.exe

@@ -46,5 +46,9 @@ USER root
     # generate wrapper
     COPY wine-wrappers /wine-wrappers
     RUN cd wine-wrappers && cmake -GNinja -B_gen -H. && ninja -C_gen install && cd ..
-
+    
+    #rename header files (mini-chromium)
+    RUN cd /mingw64/x86_64-w64-mingw32/include \ 	
+        && cp ntsecapi.h NTSecAPI.h
+        
     CMD [ "/usr/bin/bash" ]

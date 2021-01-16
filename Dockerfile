@@ -50,5 +50,8 @@ USER root
     #rename header files (mini-chromium)
     RUN cd /mingw64/x86_64-w64-mingw32/include \ 	
         && cp ntsecapi.h NTSecAPI.h
-        
+    
+    # IFW : fix behavior on wine misworking
+    RUN sed -i "s|NOT CPACK_IFW_FRAMEWORK_VERSION_RESULT AND CPACK_IFW_FRAMEWORK_VERSION_OUTPUT|CPACK_IFW_FRAMEWORK_VERSION_OUTPUT|g" /usr/share/cmake-3.19/Modules/CPackIFW.cmake
+    
     CMD [ "/usr/bin/bash" ]

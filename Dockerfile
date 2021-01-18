@@ -54,4 +54,7 @@ USER root
     # IFW : fix behavior on wine misworking
     RUN sed -i "s|NOT CPACK_IFW_FRAMEWORK_VERSION_RESULT AND CPACK_IFW_FRAMEWORK_VERSION_OUTPUT|CPACK_IFW_FRAMEWORK_VERSION_OUTPUT|g" /usr/share/cmake-3.19/Modules/CPackIFW.cmake
     
+    #-install sentry-cli    
+    RUN curl -sL https://sentry.io/get-cli/ | bash
+    
     CMD [ "/usr/bin/bash" ]
